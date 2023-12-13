@@ -1,0 +1,18 @@
+{
+  "name": "puppeteer-responsive",
+  "version": "1.0.0",
+  "description": "Testing Web Responsive using Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "keywords": [
+    "Javascript",
+    "Puppeteer"
+  ],
+  "author": "Rendy Aksmala",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^21.6.0"
+  }
+}
