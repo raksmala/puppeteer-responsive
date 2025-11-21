@@ -5,7 +5,8 @@ const path = require("path");
 async function testResponsive(url) {
   const browser = await puppeteer.launch({
     headless: false,
-    slowMo: 250,
+    // slowMo: 250,
+    args: ["--window-size=1920,1080", "--window-position=1921,0"],
   });
   const page = await browser.newPage();
 
@@ -81,8 +82,21 @@ async function testResponsive(url) {
     fs.mkdirSync(resultsFolder);
   }
 
+  const email = "rendya";
+  const password = "a";
+
   try {
-    await page.goto(url);
+    await page.goto(`${url}/wp-login.php`);
+
+    await page.type("input[name='log']", email);
+    await page.type("input[name='pwd']", password);
+
+    // Click the login button
+    await page.click("input[name='wp-submit']");
+
+    // Wait for navigation or any asynchronous tasks
+    await page.waitForNavigation();
+    await page.goto(`${url}/`);
 
     for (const device of devices) {
       await setViewport(device);
@@ -107,4 +121,4 @@ async function testResponsive(url) {
 }
 
 // Replace 'https://example.com' with the URL you want to test
-testResponsive("https://github.com/raksmala");
+testResponsive("http://mdt.local");
